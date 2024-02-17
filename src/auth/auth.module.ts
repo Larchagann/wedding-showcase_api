@@ -6,15 +6,17 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { InvitationService } from 'src/invitation/invitation.service';
 import { Invitation } from 'src/invitation/invitation.model';
 import { InvitationModule } from 'src/invitation/invitation.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     InvitationModule,
     TypeOrmModule.forFeature([Invitation]),
     JwtModule.register({
       global: true,
-      secret: "1234567890",
-      signOptions: { expiresIn: '24h' },
+      secret: process.env.JWT_SECRET_KEY,
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   providers: [AuthService, InvitationService],
