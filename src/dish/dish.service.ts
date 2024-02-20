@@ -10,9 +10,8 @@ export class DishService {
     public dishs: Repository<Dish>,
   ) {}
 
-  async findAllByIdInvitation(
-    idInvitation: number,
-  ): Promise<Dish[]> {
+  //Pour front public
+  async findAllByIdInvitation(idInvitation: number): Promise<Dish[]> {
     const options: FindManyOptions = {
       where: { invitation: idInvitation },
       relations: ['dishType'],

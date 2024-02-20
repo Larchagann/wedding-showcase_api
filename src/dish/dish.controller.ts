@@ -18,6 +18,7 @@ import { AuthGuard } from '../auth/auth.guard';
 export class DishController {
   constructor(private readonly dishService: DishService) {}
 
+  //Pour front public
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('all')

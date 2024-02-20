@@ -10,6 +10,34 @@ export class InvitationService {
     public invitations: Repository<Invitation>,
   ) {}
 
+  //Pour front admin
+  async findAll(): Promise<Invitation[]> {
+    const options: FindManyOptions= {
+      relations: ['guest', 'dish']
+    }
+    return this.invitations.find(options);
+  }
+
+  async createInvitation(invitationData: Invitation): Promise<any> {
+    const invitation = this.invitations.create(invitationData);
+    return this.invitations.save(invitation);
+  }
+
+  async deleteInvitation(idInvitation: number): Promise<void> {
+    const options: FindManyOptions = {
+      where: { idInvitation: idInvitation },
+    };
+    const invitation = await this.invitations.find(options);
+
+    if (!invitation) {
+      throw new NotFoundException(
+        `Aucune invitation avec l'id ${idInvitation} trouvée.`,
+      );
+    }
+    await this.invitations.delete(idInvitation);
+  }
+
+  //Pour front public
   async findOne(mailAddress: string): Promise<Invitation | undefined> {
     const options: FindOneOptions = {
       where: { mailAddress: mailAddress },
@@ -26,25 +54,7 @@ export class InvitationService {
     return result;
   }
 
-  async createInvitation(invitationData: Invitation): Promise<any> {
-    const categorie = this.invitations.create(invitationData);
-    return this.invitations.save(categorie);
-  }
-
-  async deleteInvitation(idInvitation: number): Promise<void> {
-    const options: FindManyOptions = {
-      where: { idInvitation: idInvitation },
-    };
-    const categorie = await this.invitations.find(options);
-
-    if (!categorie) {
-      throw new NotFoundException(
-        `Aucune invitation avec l'id ${idInvitation} trouvée.`,
-      );
-    }
-    await this.invitations.delete(idInvitation);
-  }
-
+  //Pour les deux 
   async updateInvitation(
     idInvitation: number,
     updatedInvitationData: Invitation,
