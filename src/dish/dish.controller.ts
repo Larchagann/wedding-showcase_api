@@ -32,6 +32,7 @@ export class DishController {
     return this.dishService.createDish(dishData);
   }
 
+  @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Delete(':id')
   async deleteDish(@Param('id') idDish: number) {

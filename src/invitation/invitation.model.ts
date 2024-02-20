@@ -8,6 +8,9 @@ export class Invitation {
   idInvitation: number;
 
   @Column()
+  name: string;
+
+  @Column()
   mailAddress: string;
 
   @Column()

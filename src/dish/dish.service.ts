@@ -27,12 +27,10 @@ export class DishService {
   }
 
   async deleteDish(idDish: number): Promise<void> {
-    console.log("idDish",idDish)
     const options: FindManyOptions = {
       where: { idDish: idDish },
     };
     const dish = await this.dishs.find(options);
-    console.log("Dish",dish)
     if (!dish) {
       throw new NotFoundException(`Aucun plat avec l'id ${idDish} trouvée.`);
     }
