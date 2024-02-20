@@ -12,6 +12,9 @@ import { DishType } from './dish-type/dish-type.model';
 import { Guest } from './guest/guest.model';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthAdminModule } from './auth-admin/auth-admin.module';
+import { AdminModule } from './admin/admin.module';
+import { Admin } from 'typeorm';
 
 @Module({
   imports: [
@@ -23,10 +26,12 @@ import { ConfigModule } from '@nestjs/config';
       username:  process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [Invitation, Dish, DishType, Guest],
+      entities: [Invitation, Dish, DishType, Guest, Admin],
       synchronize: true, //Mettre false en prod
     }),
     AuthModule,
+    AuthAdminModule,
+    AdminModule,
     InvitationModule,
     GuestModule,
     DishModule,
