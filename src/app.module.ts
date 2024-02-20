@@ -14,7 +14,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthAdminModule } from './auth-admin/auth-admin.module';
 import { AdminModule } from './admin/admin.module';
-import { Admin } from 'typeorm';
+import { Admin } from './admin/admin.model';
 
 @Module({
   imports: [
