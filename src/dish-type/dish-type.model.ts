@@ -9,6 +9,6 @@ export class DishType {
   @Column()
   label: string;
 
-  @OneToMany(() => Dish, (dish) => dish.dishType)
+  @OneToMany(() => Dish, (dish) => dish.dishType, { onDelete: 'CASCADE' })
   dish: Dish[];
 }

@@ -19,9 +19,9 @@ export class Invitation {
   @Column()
   isCityHallInvited: boolean;
 
-  @OneToMany(() => Guest, (guest) => guest.invitation)
+  @OneToMany(() => Guest, (guest) => guest.invitation, { onDelete: 'CASCADE' })
   guest: Guest[];
 
-  @OneToMany(() => Dish, (dish) => dish.invitation)
+  @OneToMany(() => Dish, (dish) => dish.invitation, { onDelete: 'CASCADE' })
   dish: Dish[];
 }
