@@ -27,7 +27,7 @@ import { Admin } from './admin/admin.model';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       entities: [Invitation, Dish, DishType, Guest, Admin],
-      synchronize: true, //Mettre false en prod
+      synchronize: false, //Mettre false en prod
     }),
     AuthModule,
     AuthAdminModule,
