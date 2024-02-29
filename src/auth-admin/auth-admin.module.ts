@@ -16,7 +16,7 @@ import { AuthAdminController } from './auth-admin.controller';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET_KEY_ADMIN,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '24h' },
     }),
   ],
   providers: [AuthAdminService, AdminService],
