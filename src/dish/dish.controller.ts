@@ -13,10 +13,19 @@ import {
 import { DishService } from './dish.service';
 import { Dish } from './dish.model';
 import { AuthGuard } from '../auth/auth.guard';
+import { AuthAdminGuard } from 'src/auth-admin/auth-admin.guard';
 
 @Controller('dish')
 export class DishController {
   constructor(private readonly dishService: DishService) {}
+
+  //Pour front admin
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthAdminGuard)
+  @Get('admin/all')
+  findAll(): Promise<Dish[]> {
+    return this.dishService.findAll();
+  }
 
   //Pour front public
   @HttpCode(HttpStatus.OK)

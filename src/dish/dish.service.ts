@@ -10,6 +10,14 @@ export class DishService {
     public dishs: Repository<Dish>,
   ) {}
 
+  //Pour front Admin
+  async findAll(): Promise<Dish[]> {
+    const options: FindManyOptions = {
+      relations: ['invitation', 'dishType'],
+    };
+    return this.dishs.find(options);
+  }
+
   //Pour front public
   async findAllByIdInvitation(idInvitation: number): Promise<Dish[]> {
     const options: FindManyOptions = {
