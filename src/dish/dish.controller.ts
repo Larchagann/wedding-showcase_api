@@ -37,6 +37,13 @@ export class DishController {
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
+  @Get('allguest')
+  findAllForAllGuest(): Promise<Dish[]> {
+    return this.dishService.findAllForAllGuest();
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
   @Post()
   createDish(@Body() dishData: Dish): Promise<any> {
     return this.dishService.createDish(dishData);

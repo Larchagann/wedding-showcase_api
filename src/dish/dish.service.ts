@@ -28,6 +28,13 @@ export class DishService {
     return result;
   }
 
+  async findAllForAllGuest(): Promise<Dish[]> {
+    const options: FindManyOptions = {
+      relations: ['dishType'],
+    };
+    return this.dishs.find(options);
+  }
+
   async createDish(dishData: Dish): Promise<any> {
     const dish = this.dishs.create(dishData);
     return this.dishs.save(dish);
