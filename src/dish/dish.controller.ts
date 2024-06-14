@@ -38,8 +38,8 @@ export class DishController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
   @Get('allguest')
-  findAllForAllGuest(): Promise<Dish[]> {
-    return this.dishService.findAllForAllGuest();
+  findAllForAllGuest(@Query() query): Promise<Dish[]> {
+    return this.dishService.findAllForAllGuest(query)
   }
 
   @HttpCode(HttpStatus.OK)

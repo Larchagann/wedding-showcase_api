@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Query } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindManyOptions, Repository } from 'typeorm';
+import { FindManyOptions, Repository, Not } from 'typeorm';
 import { Dish } from './dish.model';
 
 @Injectable()
@@ -28,8 +28,9 @@ export class DishService {
     return result;
   }
 
-  async findAllForAllGuest(): Promise<Dish[]> {
+  async findAllForAllGuest(@Query() query): Promise<Dish[]> {
     const options: FindManyOptions = {
+      where: { invitation : Not(query.idInvitation)},
       relations: ['dishType'],
     };
     return this.dishs.find(options);
